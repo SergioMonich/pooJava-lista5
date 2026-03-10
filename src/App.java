@@ -170,7 +170,26 @@ public class App {
           • Calcular a média de preços com Collectors.averagingDouble().
        */
 
-        
+      /*
+      ArrayList<Produto> produtos = new ArrayList<>();
+      produtos.add(new Produto("Garrafa", 100.0));
+      produtos.add(new Produto("Monitor", 450.0));
+      produtos.add(new Produto("Carregador", 20.0));
+      produtos.add(new Produto("Cabo USB", 10.0));
+      produtos.add(new Produto("Cafeteira", 300.0));
+      produtos.add(new Produto("Lampada Int", 50.0));
+      produtos.add(new Produto("Fone de Ouvido", 150.0));
+      produtos.add(new Produto("Teclado", 80.0));
+      
+      Map<String, Double> precoPorProduto = produtos.stream()
+         .collect(Collectors.toMap(Produto::getNome, Produto::getPreco));
+      System.out.println("Preços por produto: ");
+      precoPorProduto.forEach((nome, preco) -> System.out.println(nome + ": " + preco));
+
+      double somaPrecos = produtos.stream()
+         .collect(Collectors.summingDouble(Produto::getPreco));
+      System.out.println("Soma dos preços dos produtos: " + somaPrecos);
+      */
 
       /**
        * 6. Filtragem, Contagem e Transformação de Objetos 
@@ -182,7 +201,39 @@ public class App {
           • Criar uma lista apenas com os nomes dos clientes usando .map(Cliente::getNome). 
        */
 
+      /*
+      ArrayList<Cliente> clientes = new ArrayList<>();
+      clientes.add(new Cliente("João", 25));
+      clientes.add(new Cliente("Maria", 35));
+      clientes.add(new Cliente("Pedro", 17));
+      clientes.add(new Cliente("Ana", 40));
+      clientes.add(new Cliente("Lucas", 17));
+      clientes.add(new Cliente("Carla", 28));
+      clientes.add(new Cliente("Rafael", 19));
+      clientes.add(new Cliente("Fernanda", 31));
+      clientes.add(new Cliente("Bruna", 16));
+      clientes.add(new Cliente("Gustavo", 27));
 
+      List<Cliente> clientesMaioresDe18 = clientes.stream()
+         .filter(c -> c.getIdade() > 18)
+         .collect(Collectors.toList());
+      System.out.println("Clientes maiores de 18 anos: ");
+      clientesMaioresDe18.forEach(c -> System.out.println(c.getNome() + " - " + c.getIdade()));
+
+      long countClientesMaisDe30 = clientes.stream()
+         .filter(c -> c.getIdade() > 30)
+         .count();
+      System.out.println("Quantidade de clientes com mais de 30 anos: " + countClientesMaisDe30);
+      clientes.stream()
+         .filter(c -> c.getIdade() > 30)
+         .map(Cliente::getNome)
+         .forEach(nome -> System.out.println("Cliente com mais de 30 anos: " + nome));
+
+      List<String> nomesClientes = clientes.stream()
+         .map(Cliente::getNome)
+         .collect(Collectors.toList());
+      System.out.println("Nomes dos clientes: " + nomesClientes);
+      */
 
       /**
        * 7. Encontrar o Maior e o Menor Valor de uma Lista com Mapeamento 
@@ -193,8 +244,34 @@ public class App {
           • Criar uma lista intermediária contendo apenas os nomes dos produtos usando .map(Produto::getNome). 
        */
 
+      /*
+      ArrayList<Produto> produtos = new ArrayList<>();
+      produtos.add(new Produto("Calça", 100.0));
+      produtos.add(new Produto("Meias", 10.0));
+      produtos.add(new Produto("Camiseta Regata", 20.0));  
+      produtos.add(new Produto("Camisa Polo", 60.0));
+      produtos.add(new Produto("Bermuda", 30.0));  
+      produtos.add(new Produto("Tenis", 150.0));
+      produtos.add(new Produto("Camiseta Basica", 40.0));
+      produtos.add(new Produto("Mochila", 80.0));
 
+      Produto produtoMaisCaro = produtos.stream()
+         .collect(Collectors.maxBy(Comparator.comparing(Produto::getPreco)))
+         .orElse(null);
+      System.out.println("Produto mais caro: " + produtoMaisCaro.getNome());
+         
 
+      Produto produtoMaisBarato = produtos.stream()
+         .collect(Collectors.minBy(Comparator.comparing(Produto::getPreco)))
+         .orElse(null);
+      System.out.println("Produto mais barato: " + produtoMaisBarato.getNome());
+
+      System.out.println("Produtos: ");
+      produtos.stream()
+         .map(Produto::getNome)
+         .forEach(nome -> System.out.println(nome));
+      */
+         
       /**
        * 8. Concatenar Strings de uma Lista e Criar uma Representação Textual 
           Crie uma interface Descritivel com um método String getDescricao(). 
@@ -204,8 +281,21 @@ public class App {
           • Criar uma lista intermediária contendo apenas descrições das pessoas usando .map(Pessoa::getDescricao). 
           • Concatenar todas as descrições em uma única string separada por vírgulas usando Collectors.joining(", ").  
        */
+      /*
+      ArrayList<Pessoa1> pessoas = new ArrayList<>();
+      pessoas.add(new Pessoa1("João", 1.75f, 70.0f, "Preto"));
+      pessoas.add(new Pessoa1("Maria", 1.60f, 60.0f, "Castanho"));
+      pessoas.add(new Pessoa1("Pedro", 1.80f, 80.0f, "Loiro"));
+      pessoas.add(new Pessoa1("Ana", 1.65f, 55.0f, "Ruivo"));
+      pessoas.add(new Pessoa1("Lucas", 1.90f, 90.0f, "Preto"));
+      pessoas.add(new Pessoa1("Carla", 1.70f, 65.0f, "Castanho"));
 
+      List<String> descricoesPessoas = pessoas.stream()
+         .map(Pessoa1::getDescricao)
+         .collect(Collectors.toList());
 
+      System.out.println("Descrições das pessoas: " + descricoesPessoas);
+      */
 
       /**
        * 9. Conversão de Lista de Objetos para um Map Baseado em Identificadores 
