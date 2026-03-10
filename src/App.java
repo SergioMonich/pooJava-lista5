@@ -6,6 +6,7 @@
 --> LINKEDIN: https://www.linkedin.com/in/sergiomonich/
 */
 
+import java.lang.reflect.Array;
 import java.rmi.server.SocketSecurityException;
 import java.util.ArrayList;      
 import java.util.Arrays;
@@ -306,7 +307,23 @@ public class App {
           • Utilize .collect(Collectors.toMap(Produto::getId, p -> p)).
        */
 
+      /*
+      ArrayList<Produto1> produtos = new ArrayList<>();
+      produtos.add(new Produto1(1, "Prato", 10.0));
+      produtos.add(new Produto1(2, "Garfo", 5.0));   
+      produtos.add(new Produto1(3, "Faca", 6.0));
+      produtos.add(new Produto1(4, "Copo", 6.5));
+      produtos.add(new Produto1(5, "Colher", 4.5));
+      produtos.add(new Produto1(6, "Talha de mesa", 50.0));
+      produtos.add(new Produto1(7, "Garrafa", 45.0));
+      produtos.add(new Produto1(8, "Tabua", 80.0));
+      produtos.add(new Produto1(9, "Xicara", 4.0));
 
+      Map<Integer, Produto1> produtoMap = produtos.stream()
+         .collect(Collectors.toMap(Produto1::getId, p -> p));
+      System.out.println("Produtos mapeados por ID: ");
+      produtoMap.forEach((id, produto) -> System.out.println("ID: " + id + ", Nome: " + produto.getNome() + ", Preço: R$" + produto.getPreco()));
+      */
 
       /**
        * 10. Filtragem de Dados e Cálculo Estatístico 
@@ -318,7 +335,37 @@ public class App {
           • Criar uma lista contendo apenas os nomes dos vendedores usando .map(Vendedor::getNome). 
        */
 
+      /*
+      ArrayList<Vendedor> vendedores = new ArrayList<>();
+      vendedores.add(new Vendedor("João", 15000.0));
+      vendedores.add(new Vendedor("Maria", 8000.0));
+      vendedores.add(new Vendedor("Pedro", 12000.0)); 
+      vendedores.add(new Vendedor("Ana", 9000.0));
+      vendedores.add(new Vendedor("Lucas", 20000.0)); 
+      vendedores.add(new Vendedor("Carla", 7000.0));
+      vendedores.add(new Vendedor("Rafael", 11000.0));
 
+      List<Vendedor> vendedoresAcima10000 = vendedores.stream()
+         .filter(v -> v.getTotalDeVendas() > 10000.0)
+         .collect(Collectors.toList());
+      System.out.println("Vendedores com total de vendas acima de R$ 10.000,00: ");
+      vendedoresAcima10000.forEach(v -> System.out.println(v.getNome() + " - R$" + v.getTotalDeVendas()));
+
+      Vendedor vendedorMaisVendas = vendedores.stream()
+         .collect(Collectors.maxBy(Comparator.comparing(Vendedor::getTotalDeVendas)))
+         .orElse(null);
+      System.out.println("Vendedor com maior total de vendas: " + vendedorMaisVendas.getNome() + " - R$" + vendedorMaisVendas.getTotalDeVendas());
+
+      Vendedor vendedorMenosVendas = vendedores.stream()
+         .collect(Collectors.minBy(Comparator.comparing(Vendedor::getTotalDeVendas)))
+         .orElse(null);
+      System.out.println("Vendedor com menor total de vendas: " + vendedorMenosVendas.getNome() + " - R$" + vendedorMenosVendas.getTotalDeVendas());
+
+      List<String> nomesVendedores = vendedores.stream()
+         .map(Vendedor::getNome)
+         .collect(Collectors.toList());
+      System.out.println("Nomes dos vendedores: " + nomesVendedores);
+      */
 
       /**
        * 11. Criar e Agrupar Objetos por Status 
@@ -328,8 +375,31 @@ public class App {
           • Criar uma lista intermediária contendo apenas os pedidos com status "Pago". 
           • Agrupar os pedidos por status em um Map<String, List<Pedido>> usando Collectors.groupingBy(Pedido::getStatus). 
        */
+      /*
+      ArrayList<Pedido1> pedidos = new ArrayList<>();
+      pedidos.add(new Pedido1(1, "João", "Pago")); 
+      pedidos.add(new Pedido1(2, "Maria", "Pendente"));
+      pedidos.add(new Pedido1(3, "Pedro", "Cancelado")); 
+      pedidos.add(new Pedido1(4, "Ana", "Pago"));
+      pedidos.add(new Pedido1(5, "Lucas", "Pendente"));
+      pedidos.add(new Pedido1(6, "Carla", "Pago"));
+      pedidos.add(new Pedido1(7, "Rafael", "Cancelado"));
+      pedidos.add(new Pedido1(8, "Fernanda", "Pago"));
+      pedidos.add(new Pedido1(9, "Bruna", "Pendente"));
+      pedidos.add(new Pedido1(10, "Gustavo", "Pago"));
 
+      List<Pedido1> pedidosPagos = pedidos.stream()
+         .filter(p -> p.getStatus().equals("Pago"))
+         .collect(Collectors.toList());
+      System.out.println("Pedidos com status 'Pago': " + pedidosPagos.stream().map(Pedido1::getCliente).collect(Collectors.joining(", ")));
 
+      Map<String, List<Pedido1>> pedidosPorStatus = pedidos.stream()
+         .collect(Collectors.groupingBy(Pedido1::getStatus));
+      System.out.println("Pedidos agrupados por status: ");
+      pedidosPorStatus.forEach((status, lista) -> {
+         System.out.println(status + ": " + lista.stream().map(Pedido1::getCliente).collect(Collectors.joining(", ")));
+      });
+      */
 
       /**
        * 12. Criar e Transformar Listas de Funcionários para Salários Ajustados 
@@ -340,8 +410,30 @@ public class App {
           • Aplicar um aumento de 10% nos salários usando .map(f -> new Funcionario(f.getNome(), f.getSalario() * 1.1, f.getDepartamento())). 
           • Criar um Map<String, Double> contendo o total dos salários por departamento usando .collect(Collectors.groupingBy(Funcionario::getDepartamento, Collectors.summingDouble(Funcionario::getSalario))).
        */
+      /*
+      ArrayList<Funcionario1> funcionarios = new ArrayList<>();
+      funcionarios.add(new Funcionario1("João", 5000.0, "TI"));
+      funcionarios.add(new Funcionario1("Maria", 3000.0, "RH"));
+      funcionarios.add(new Funcionario1("Pedro", 5500.0, "TI"));  
+      funcionarios.add(new Funcionario1("Ana", 3200.0, "Financeiro"));
+      funcionarios.add(new Funcionario1("Lucas", 6000.0, "TI"));
+      funcionarios.add(new Funcionario1("Carla", 3500.0, "RH"));
+      funcionarios.add(new Funcionario1("Rafael", 5200.0, "TI"));
+      funcionarios.add(new Funcionario1("Fernanda", 3100.0, "Financeiro"));
+      funcionarios.add(new Funcionario1("Bruna", 5800.0, "TI"));
 
+      List<Funcionario1> funcionariosTI = funcionarios.stream()
+         .filter(f -> f.getDepartamento().equals("TI"))
+         .map(f -> new Funcionario1(f.getNome(), f.getSalario(), f.getDepartamento()))
+         .collect(Collectors.toList());
+      System.out.println("Funcionários do departamento TI: " + funcionariosTI.stream().map(Funcionario1::getNome).collect(Collectors.joining(", ")));
+      System.out.println("Funcionários do departamento TI com aumento de 10%: " + funcionariosTI.stream().map(f -> f.getNome() + " - R$" + (f.getSalario() * 1.1)).collect(Collectors.joining(", ")));
 
+      Map<String, Double> totalSalariosPorDepartamento = funcionarios.stream()
+         .collect(Collectors.groupingBy(Funcionario1::getDepartamento, Collectors.summingDouble(Funcionario1::getSalario)));
+      System.out.println("Total dos salários por departamento: ");
+      totalSalariosPorDepartamento.forEach((departamento, total) -> System.out.println(departamento + ": R$" + total));
+      */
 
       /**
        * 13. Criar, Ordenar e Transformar Objetos de Uma Lista 
@@ -352,7 +444,32 @@ public class App {
           • Criar uma lista intermediária contendo apenas os títulos dos livros usando .map(Livro::getTitulo). 
           • Criar uma única string contendo os títulos separados por " | " usando .collect(Collectors.joining(" | ")).
        */
+      /*
+      ArrayList<Livro> livros = new ArrayList<>();
+      livros.add(new Livro("O Alquimista", "Paulo Coelho", 30.0));
+      livros.add(new Livro("Dom Casmurro", "Machado de Assis", 25.0));
+      livros.add(new Livro("A Metamorfose", "Franz Kafka", 20.0));
+      livros.add(new Livro("O Pequeno Príncipe", "Antoine de Saint-Exupéry", 35.0));
+      livros.add(new Livro("1984", "George Orwell", 28.0)); 
+      livros.add(new Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 50.0)); 
+      livros.add(new Livro("A Divina Comédia", "Dante Alighieri", 40.0));
 
+      List<String> titulosLivros = livros.stream()
+         .sorted(Comparator.comparing(Livro::getPreco).thenComparing(Livro::getAutor))
+         .map(Livro::getTitulo)
+         .collect(Collectors.toList());
+      System.out.println("Livros ordenados por preço (crescente): " + titulosLivros);
+
+      List<String> titulosLivrosSeparados = livros.stream()
+         .map(Livro::getTitulo)
+         .collect(Collectors.toList());
+      System.out.println("Lista de títulos dos livros: " + titulosLivrosSeparados);
+
+      String titulosConcatenados = livros.stream()
+         .map(Livro::getTitulo)
+         .collect(Collectors.joining(" | "));
+      System.out.println("Titulos dos livros concatenados: " + titulosConcatenados);
+      */
     }
 
 }
